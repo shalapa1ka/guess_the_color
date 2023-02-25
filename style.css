@@ -1,0 +1,77 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: .5rem 0;
+    background: #2D8E99;
+    color: #fff;
+    border-radius: 10px ;
+}
+
+.btn {
+    background: #2D8E99;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #2D8E99;
+}
+
+.btn:hover {
+    background: #fff;
+    color: #2D8E99;
+    border: 1px solid #2D8E99;
+}
+
+.btn.selected {
+    background: #fff;
+    color: #2D8E99;
+    pointer-events: none;
+}
+
+.menu {
+    margin: 10px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card {
+    width: 30%;
+    padding-bottom: 30%;
+    margin: .5rem 0;
+    background: #000;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
