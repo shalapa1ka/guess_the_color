@@ -32,7 +32,6 @@ header {
 .btn {
     background: #2D8E99;
     color: #fff;
-    border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -72,6 +71,6 @@ main {
     padding-bottom: 30%;
     margin: .5rem 0;
     background: #000;
-    border-radius: 15px;
+    border-radius: 50px;
     box-shadow: 0 0 10px rgba(0,0,0,.5);
 }
