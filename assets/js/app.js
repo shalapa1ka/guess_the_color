@@ -5,7 +5,7 @@ const newGameBtn = document.querySelector('.new-game');
 const cardList = document.querySelector('main');
 for (let card of cardList.children) {
     card.addEventListener('click', () => {
-        guess(card.style.backgroundColor);
+        guess(card);
     });
 }
 
@@ -20,6 +20,12 @@ const toggleSelectedBtn = (btn) => {
 
 const randColor = () => {
     return Math.floor(Math.random()*16777215).toString(16);
+}
+
+const clearMarks = (cardList) => {
+    for (let card of cardList.children) {
+        if (card.children.length > 0) card.removeChild(card.children[0]);
+    }
 }
 
 const shuffleArray = (arr) => {
@@ -69,14 +75,24 @@ const newGame = () => {
         colors.push(randColor());
     }
     shuffleArray(colors);
+    clearMarks(cardList);
     updateUI();
 }
 
-const guess = (color) => {
-    if (rgbToHex(color) === guessColor) {
-        alert('You win!');
+const guess = (card) => {
+    if (card.children.length > 0) {
+        return;
+    }
+    if (rgbToHex(card.style.backgroundColor) === guessColor) {
+        const image = document.createElement('img');
+        image.src = 'assets/images/check.png';
+        image.alt = 'You won!';
+        card.appendChild(image);
     } else {
-        alert('You lose!');
+        const image = document.createElement('img');
+        image.src = 'assets/images/error.png';
+        image.alt = 'You lost!';
+        card.appendChild(image);
     }
 }
 

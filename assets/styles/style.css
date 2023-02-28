@@ -73,4 +73,17 @@ main {
     background: #000;
     border-radius: 50px;
     box-shadow: 0 0 10px rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+img {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
