@@ -22,7 +22,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: .2rem;
     padding: .5rem 0;
     background: #2D8E99;
     color: #fff;
@@ -67,8 +67,8 @@ main {
 }
 
 .card {
-    width: 30%;
-    padding-bottom: 30%;
+    width: 27%;
+    padding-bottom: 27%;
     margin: .5rem 0;
     background: #000;
     border-radius: 50px;
