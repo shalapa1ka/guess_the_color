@@ -2,12 +2,14 @@ const easyBtn = document.querySelector('.easy');
 const hardBtn = document.querySelector('.hard');
 const newGameBtn = document.querySelector('.new-game');
 const cardList = document.querySelector('main');
+const scoreDiv = document.querySelector('.score');
 const successAlertSound = new Audio('assets/sounds/success.mp3');
 successAlertSound.volume = 0.2;
 const EASY_MODE = 6;
 const HARD_MODE = 9;
 const colors = [];
 let guessColor = '';
+let score = 0;
 
 
 const toggleSelectedBtn = (btn) => {
@@ -113,13 +115,16 @@ const guess = (card) => {
         image.src = 'assets/images/check.png';
         image.alt = 'You won!';
         card.appendChild(image);
-        successAlertSound.play()
+        score++;
+        successAlertSound.play();
     } else {
         const image = document.createElement('img');
         image.src = 'assets/images/error.png';
         image.alt = 'You lost!';
         card.appendChild(image);
+        score--;
     }
+    scoreDiv.textContent = `Score: ${score}`;
 }
 
 easyBtn.addEventListener('click', toggleSelectedBtn);
