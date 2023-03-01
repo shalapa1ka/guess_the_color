@@ -10,6 +10,7 @@ const HARD_MODE = 9;
 const colors = [];
 let guessColor = '';
 let score = 0;
+let isAlreadyLose = false;
 
 
 const toggleSelectedBtn = (btn) => {
@@ -17,8 +18,13 @@ const toggleSelectedBtn = (btn) => {
     hardBtn.classList.toggle('selected');
 }
 
-const randColor = () => {
-    return Math.floor(Math.random()*16777215).toString(16);
+function getRandomColor() {
+    let letters = "0123456789abcdef"; // Possible hex digits
+    let color = "";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)]; // Choose a random digit
+    }
+    return color;
 }
 
 const clearMarks = (cardList) => {
@@ -44,15 +50,19 @@ const hexToRgb = (hex) => {
 
 function rgbToHex(col)
 {
-    if(col.charAt(0)==='r')
-    {
-        col=col.replace('rgb(','').replace(')','').split(',');
-        let r=parseInt(col[0], 10).toString(16);
-        let g=parseInt(col[1], 10).toString(16);
-        let b=parseInt(col[2], 10).toString(16);
-        r=r.length===1?'0'+r:r; g=g.length===1?'0'+g:g; b=b.length===1?'0'+b:b;
-        return r + g + b;
-    }
+    if (col.charAt(0) === '#')
+        return col;
+
+    let nums = /(.*?)rgb\((\d+),\s*(\d+),\s*(\d+)\)/i.exec(col),
+        r = parseInt(nums[2], 10).toString(16),
+        g = parseInt(nums[3], 10).toString(16),
+        b = parseInt(nums[4], 10).toString(16);
+
+    return (
+        (r.length === 1 ? "0" + r : r) +
+        (g.length === 1 ? "0" + g : g) +
+        (b.length === 1 ? "0" + b : b)
+    );
 }
 const updateUI = () => {
     const mode = easyBtn.classList.contains('selected') ? EASY_MODE : HARD_MODE;
@@ -94,11 +104,12 @@ const createCards = () => {
 
 const newGame = () => {
     const mode = easyBtn.classList.contains('selected') ? EASY_MODE : HARD_MODE;
-    guessColor = randColor();
+    guessColor = getRandomColor();
+    isAlreadyLose = false;
     colors.clear();
     colors.push(guessColor);
-    for (let i = 0; i < mode; i++) {
-        colors.push(randColor());
+    for (let i = 0; i < mode - 1; i++) {
+        colors.push(getRandomColor());
     }
     createCards();
     shuffleArray(colors);
@@ -122,7 +133,10 @@ const guess = (card) => {
         image.src = 'assets/images/error.png';
         image.alt = 'You lost!';
         card.appendChild(image);
-        score--;
+        if (!isAlreadyLose) {
+            score--;
+            isAlreadyLose = true;
+        }
     }
     scoreDiv.textContent = `Score: ${score}`;
 }
